@@ -84,9 +84,11 @@ shapeHulls <- function(x, groups = NULL, group.cols = NULL,
   
   for(i in 1:g){
     yy <- y[groups == ug[i],]
-    chp <- chull(yy)
-    chp <- c(chp, chp[1])
-    points(yy[chp,], type = "l", lty = group.lty[i],
+      if(!is.null(dim(yy))){
+        chp <- chull(yy)
+        chp <- c(chp, chp[1])
+        points(yy[chp,], type = "l", lty = group.lty[i],
            lwd = group.lwd[i], col = group.cols[i])
+        }
   }
 }
